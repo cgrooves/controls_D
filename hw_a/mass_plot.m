@@ -60,7 +60,7 @@ guidata(hObject, handles);
 
 % UIWAIT makes mass_plot wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
-set(handles.z_slider,'Max',18);
+set(handles.z_slider,'Max',11,'Min',-6);
 crappy_draw_mass(handles)
 
 
