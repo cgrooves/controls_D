@@ -22,7 +22,7 @@ function varargout = mass_plot(varargin)
 
 % Edit the above text to modify the response to help mass_plot
 
-% Last Modified by GUIDE v2.5 15-Sep-2017 19:11:25
+% Last Modified by GUIDE v2.5 15-Sep-2017 19:45:32
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -60,6 +60,8 @@ guidata(hObject, handles);
 
 % UIWAIT makes mass_plot wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
+set(handles.z_slider,'Max',18);
+crappy_draw_mass(handles)
 
 
 % --- Outputs from this function are returned to the command line.
@@ -81,6 +83,7 @@ function z_slider_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'Value') returns position of slider
 %        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+crappy_draw_mass(handles)
 
 
 % --- Executes during object creation, after setting all properties.
