@@ -23,10 +23,10 @@ classdef MassAnimation
             self.Length = P.Length;
             
             % Initialize axes, draw wall
-            plot(self.ax,[-0.5*P.Length,P.Length],[0,0],-P.Length/2*[1,1],[0,0.7*P.Length],'k');
+            plot(self.ax,[-0.5*P.Length,P.Length],[0,0],'k',-P.Length/2*[1,1],[0,0.7*P.Length],'k');
             hold(self.ax,'on')
             xlabel(self.ax,'z');
-            set(self.ax,'XLim',[-P.Length,1.1*P.Length],'YLim',...
+            set(self.ax,'XLim',[-0.7*P.Length,1.1*P.Length],'YLim',...
                 [-0.2*P.Length,P.Length],'dataaspectratio',[1 1 1]);
             
             % Initialize and draw everything
