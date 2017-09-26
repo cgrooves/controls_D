@@ -19,18 +19,18 @@ f_slider = handles.force_slider;
 set(f_slider,'Min',P.f_min,'Max',P.f_max,'Value',P.f_init);
 
 % Create animation object
-animation = MassBeamAnimation(P,ax);
+animation = MassAnimation(P,ax);
 
 % Graphics loop
 while isgraphics(mass)
     % get input values
     f = get(f_slider,'Value');
     % propagate dynamics
-    dynamics.propagate(f);
+    dynamics.propagateDynamics(f);
     
-    y = dynamics.y(); % get output
+    y = dynamics.output(); % get output
     animation.draw(y); % update animation
     
-    pause(0.1);
+    pause(0.05);
     
 end

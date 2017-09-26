@@ -32,15 +32,15 @@ classdef MassAnimation
             % Initialize and draw everything
             self.mass = Rectangle(P.width,P.width,[P.width/2;P.width/2],self.ax);
             self.spring = plot(self.ax,linspace(-P.Length/2,P.z0,8),...
-                P.width*[2/3 1 2/3 1 2/3 1 2/3 1],'r');
-            self.damper = plot(self.ax,[-self.Length/2,P.z0],P.width*[1/3, 1/3],'g');
+                P.width*[2/3 1 2/3 1 2/3 1 2/3 1],'b');
+            self.damper = plot(self.ax,[0,P.z0],P.width*[1/3, 1/3],'g');
         end
         %---------------------------
         function self = draw(self,z)
             self.mass.translate([z;0]);
             
-            set(self.spring,'XData',linspace(-self.Length/2,z,8));
-            set(self.damper,'XData',[-self.Length/2,z]);
+            set(self.spring,'XData',linspace(,z,8));
+            set(self.damper,'XData',[0,z]);
         end
             
     end

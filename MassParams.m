@@ -7,6 +7,7 @@ P.b = 0.5; % N sec/m, damping
 P.Ts = 0.1; % Time-step
 
 P.Length = 15;
+P.width = 4;
 
 P.z0 = 5;
 P.zdot0 = 0;
