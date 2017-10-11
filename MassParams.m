@@ -16,4 +16,12 @@ P.f_init = 0;
 P.f_min = 0;
 P.f_max = 30;
 
+P.z_min = 0;
+P.z_max = 15;
+P.z_init = 0;
+
 % Animation parameters
+
+% Controller parameters
+P.kd = 12;
+P.kp = 4.5;
