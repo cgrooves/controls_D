@@ -2,6 +2,7 @@ classdef MSDController
    
     properties
        zCtrl
+       k
        
         
     end
@@ -9,12 +10,13 @@ classdef MSDController
     methods
        %---------------------
        function self = MSDController(P)
-           self.zCtrl = pd_control(P.kp, P.kd, P.Ts);
+           self.zCtrl = PDControl(P.kp, P.kd, P.Ts, P.sat_limit);
+           self.k = P.k;
        end
        %---------------------
        function force = u(self, y_r, y)
                      
-           force = self.zCtrl.PD(y_r,y);
+           force = self.zCtrl.PD(y_r,y) + self.k*y;
            
        end
        %---------------------

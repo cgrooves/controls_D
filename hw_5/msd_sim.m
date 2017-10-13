@@ -25,8 +25,12 @@ animation = MassAnimation(P,ax);
 msd_controller = MSDController(P);
 z = dynamics.output();
 
+% Create I/O graph window
+plt = DynamicPlotData(P,'Force(N)','Z Position(m)');
+
 % Graphics loop
 while isgraphics(mass)
+    
     % get input values
     z_ref = get(z_slider,'Value');
     f = msd_controller.u(z_ref,z);
@@ -37,6 +41,8 @@ while isgraphics(mass)
     z = dynamics.output(); % update output
     animation.draw(z); % update animation
     
-    pause(0.05);
+    plt.update(f,z);
+    
+    pause(P.Ts);
     
 end

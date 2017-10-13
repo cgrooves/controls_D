@@ -1,4 +1,4 @@
-classdef pd_control < handle
+classdef PDControl < handle
    
     properties
         kp
@@ -16,15 +16,17 @@ classdef pd_control < handle
     methods
        
         % Constructor-------------------
-        function self = pd_control(kp, kd, Ts)
+        function self = PDControl(kp, kd, Ts, limit)
            self.kp = kp;
            self.kd = kd;
            self.Ts = Ts;
+           self.limit = limit;
            
            self.y_dot = 0.0;
            self.y_d1 = 0.0;
            self.error_dot = 0.0;
            self.error_d1 = 0.0;
+       
         end
         %---------------------------------
         function u = PD(self, y_r, y)
@@ -37,8 +39,17 @@ classdef pd_control < handle
             % Calculate input to plant
             u_unsat = self.kp*error - self.kd*self.y_dot;
             
-            % For now, no saturation effects taken into account
-            u = u_unsat;
+            % Saturation limits
+            if u_unsat > self.limit(2)
+                u = self.limit(2);
+            elseif u_unsat < self.limit(1)
+                u = self.limit(1);
+            else
+                u = u_unsat;
+            end
+            
+            
+            
         end
         %-----------------------------
         function self = d_y(self,y)

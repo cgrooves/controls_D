@@ -23,18 +23,50 @@ animation = MassAnimation(P,ax);
 
 % Create controller
 msd_controller = MSDController(P);
+z = dynamics.output();
+
+% Create I/O graph window
+plt = DynamicPlotData(P);
+
+% % create output
+% plt = figure;
+% response = subplot(2,1,1);
+% title(response,'System Response');
+% xlabel(response,'Time (sec)');
+% ylabel(response,'Z Position (m)');
+% 
+% input = subplot(2,1,2);
+% title(input,'System Input');
+% xlabel(input,'Time (sec)');
+% ylabel(input,'Force (N)');
+% 
+% set(response,'YLim',[0,P.z_max]);
+% set(input,'YLim',[0,5]);
+% 
+% hold(response,'on');
+% hold(input,'on');
+% 
+% t = P.t_start;
 
 % Graphics loop
 while isgraphics(mass)
+    
     % get input values
     z_ref = get(z_slider,'Value');
-    f = 
+    f = msd_controller.u(z_ref,z);
+    
     % propagate dynamics
     dynamics.propagateDynamics(f);
     
-    y = dynamics.output(); % get output
-    animation.draw(y); % update animation
+    z = dynamics.output(); % update output
+    animation.draw(z); % update animation
     
-    pause(0.05);
+%     plot(response,t,z,'r.'); % plot output
+%     plot(input,t,f,'b.'); % plot input force
+    
+%     t = t + P.Ts; % increment time
+    plt.update(u,z);
+    
+    pause(P.Ts);
     
 end
