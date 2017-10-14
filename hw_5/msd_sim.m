@@ -10,6 +10,7 @@ dynamics = MassDynamics(P);
 
 % Create GUI object
 mass = msd_gui;
+
 % get handles to GUI
 handles = guidata(mass);
 ax = handles.axes1;

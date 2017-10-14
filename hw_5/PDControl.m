@@ -37,18 +37,7 @@ classdef PDControl < handle
             self.d_y(y);
             
             % Calculate input to plant
-            u_unsat = self.kp*error - self.kd*self.y_dot;
-            
-            % Saturation limits
-            if u_unsat > self.limit(2)
-                u = self.limit(2);
-            elseif u_unsat < self.limit(1)
-                u = self.limit(1);
-            else
-                u = u_unsat;
-            end
-            
-            
+            u = self.kp*error - self.kd*self.y_dot;
             
         end
         %-----------------------------
