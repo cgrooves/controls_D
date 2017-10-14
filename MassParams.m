@@ -24,10 +24,10 @@ P.z_init = 1;
 P.t_start = 0;
 
 % Controller parameters
-P.tr = 2;
+P.tr = 2.2;
 P.zeta = 0.7;
-P.sat_limit = [-inf,inf];
-% P.kd = 22*P.zeta/P.tr - 0.5;
-% P.kp = 5*(2.2/P.tr)^2 - 3;
- P.kd = 12;
- P.kp = 4.5;
+P.sat_limit = [-2,2];
+P.kd = 22*P.zeta/P.tr - 0.5;
+P.kp = 5*(2.2/P.tr)^2 - 3;
+%  P.kd = 12;
+%  P.kp = 4.5;
