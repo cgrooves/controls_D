@@ -6,6 +6,7 @@ classdef MassDynamics < handle
         k
         b
         Ts
+        var
         
     end
     
@@ -19,10 +20,15 @@ classdef MassDynamics < handle
                 P.zdot0;...
                 ];
             
+            % Initialize uncertainty parameter
+            self.var = P.var;
+            
             % initialize other sim params
-            self.m = P.m;
-            self.k = P.k;
-            self.b = P.b;
+            % add up to 20% uncertainty to each parameter
+            self.m = P.m*((2*self.var)*rand + (1-self.var));
+            self.k = P.k*((2*self.var)*rand + (1-self.var));
+            self.b = P.b*((2*self.var)*rand + (1-self.var));
+            
             self.Ts = P.Ts;
         end
         %------------------------------

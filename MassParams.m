@@ -3,6 +3,8 @@ P.m = 5; % kg, mass
 P.k = 3; % N/m, spring constant
 P.b = 0.5; % N sec/m, damping
 
+P.var = 0.2; % uncertainty parameter, varies m, k, b
+
 % Simulation parameters
 P.Ts = 0.05; % Time-step
 
