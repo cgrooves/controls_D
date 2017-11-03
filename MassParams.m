@@ -4,6 +4,7 @@ P.k = 3; % N/m, spring constant
 P.b = 0.5; % N sec/m, damping
 
 P.var = 0.2; % uncertainty parameter, varies m, k, b
+P.tau = 0.05; % dirty derivative gain
 
 % Simulation parameters
 P.Ts = 0.05; % Time-step
@@ -28,8 +29,10 @@ P.t_start = 0;
 % Controller parameters
 P.tr = 2.2;
 P.zeta = 0.7;
-P.sat_limit = [-2,2];
-P.kd = 22*P.zeta/P.tr - 0.5;
-P.kp = 5*(2.2/P.tr)^2 - 3;
-%  P.kd = 12;
-%  P.kp = 4.5;
+P.sat_limit = [-3,3];
+
+%P.kD = 22*P.zeta/P.tr - P.b;
+%P.kP = 5*(2.2/P.tr)^2 - P.k;
+P.kI = 1.2;
+P.kP = 2;
+P.kD = 6.0;

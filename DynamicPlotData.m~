@@ -47,7 +47,7 @@ classdef DynamicPlotData < handle
             else
                 self.t = cat(2,self.t,self.t(end)+self.Ts);
             end
-
+\
             self.y = cat(2,self.y,y);
             self.u = cat(2,self.u,u);
             
