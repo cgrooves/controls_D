@@ -28,6 +28,7 @@ P.t_start = 0;
 
 % Controller parameters
 P.tr = 2.2;
+P.wn = 2.2/P.tr;
 P.zeta = 0.7;
 P.sat_limit = [-3,3];
 
@@ -36,3 +37,18 @@ P.sat_limit = [-3,3];
 P.kI = 1.2;
 P.kP = 2;
 P.kD = 6.0;
+
+% Full-state feedback stuff
+% Open-loop states
+P.A = [0, 1; 
+    -P.k/P.m, -P.b/P.m];
+P.B = [0; 1/P.m];
+P.Cr = [1 0];
+P.D = [0 0];
+
+P.C = [P.B, P.A*P.B]; % controllability matrix
+
+P.p = roots([1, 2*P.zeta*P.wn, P.wn^2]); % desired poles
+
+P.K = place(P.A, P.B, P.p); % Closed-loop gains
+P.kr = -1/(P.Cr(1,:)*((P.A - P.B*P.K)\P.B)); % feedforward gains
