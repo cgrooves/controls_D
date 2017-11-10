@@ -48,6 +48,12 @@ P.D = [0 0];
 
 P.C = [P.B, P.A*P.B]; % controllability matrix
 
+if det(P.C) == 0
+    fprintf ("System is not controllable\n");
+else
+    fprintf("System is controllable\n");
+end
+
 P.p = roots([1, 2*P.zeta*P.wn, P.wn^2]); % desired poles
 
 P.K = place(P.A, P.B, P.p); % Closed-loop gains
