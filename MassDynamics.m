@@ -50,7 +50,7 @@ classdef MassDynamics < handle
            % Return xdot = f(x,u) the derivatives of the continuous states
            % as a matrix
            f = u;
-           
+
            % Equations of motion!!!
            xdot = zeros(2,1);
            
