@@ -60,7 +60,7 @@ P.K = place(P.A, P.B, P.p); % Closed-loop gains
 P.kr = -1/(P.Cr(1,:)*((P.A - P.B*P.K)\P.B)); % feedforward gains
 
 %% Full-state feedback w/integrator
-P.p1 = cat(1,P.p,-10); % set additional pole for system
+P.p1 = cat(1,P.p,-1); % set additional pole for system
 [P.K1, P.ki1] = FSF_integrator(P.A,P.B,P.Cr,P.p1); % get gains
 
 
