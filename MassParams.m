@@ -3,7 +3,7 @@ P.m = 5; % kg, mass
 P.k = 3; % N/m, spring constant
 P.b = 0.5; % N sec/m, damping
 
-P.var = 0.2; % uncertainty parameter, varies m, k, b
+P.var = 0.0; % uncertainty parameter, varies m, k, b
 P.tau = 0.05; % dirty derivative gain
 
 % Simulation parameters
@@ -63,6 +63,8 @@ P.kr = -1/(P.Cr(1,:)*((P.A - P.B*P.K)\P.B)); % feedforward gains
 P.p1 = cat(1,P.p,-1.2); % set additional pole for system
 [P.K1, P.ki1] = FSF_integrator(P.A,P.B,P.Cr,P.p1); % get gains
 
+%% Observer
+P.p_obs = 5*P.p;
 
-
-
+P.O = Observer(P.A,P.B,P.Cr);
+P.L = P.O.gains(P.p_obs);
