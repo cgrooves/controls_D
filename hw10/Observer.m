@@ -1,11 +1,11 @@
-classdef Observer < handles
+classdef Observer < handle
     % returns Observer gains based on desired poles
     
     properties
         A
         B
         Cm
-        O
+        Obs
         
     end
     
@@ -18,23 +18,23 @@ classdef Observer < handles
             self.B = B;
             self.Cm = Cm;
             
-            self.O = self.observability();
+            self.Obs = self.observability();
             
         end
         %---------------------------------------
         function O = observability(self)
             
-            n = size(self.Cm,1);
+            n = size(self.Cm,2);
             O = zeros(n);
             
             for i = 0:n-1
-                O(i+1,:) = self.Cm*self.A^i;
+                O(i+1,:) = self.Cm*(self.A^i);
             end
             
             if det(O) == 0
-                fprintf('System is not observable');
+                fprintf('System is not observable\n');
             else
-                fprintf('System is observable');
+                fprintf('System is observable\n');
             end
             
         end
