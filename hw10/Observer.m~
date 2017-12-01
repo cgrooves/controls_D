@@ -1,0 +1,34 @@
+classdef Observer < handles
+    % returns Observer gains based on desired poles
+    
+    properties
+        A
+        B
+        Cm
+        O
+        
+    end
+    
+    methods
+        %---------------------------------------
+        function self = Observer(A,B,Cm)
+            
+            % set state matrices
+            self.A = A;
+            self.B = B;
+            self.Cm = Cm;
+            
+            self.O = observability();
+            
+        end
+        %---------------------------------------
+        function O = observability(self)
+            
+            
+            
+        end
+        %---------------------------------------
+        
+    end
+    
+end

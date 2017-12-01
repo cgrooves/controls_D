@@ -30,7 +30,7 @@ P.t_start = 0;
 P.tr = 2.2;
 P.wn = 2.2/P.tr;
 P.zeta = 0.7;
-P.sat_limit = [-3,3];
+P.sat_limit = [0,5];
 
 %P.kD = 22*P.zeta/P.tr - P.b;
 %P.kP = 5*(2.2/P.tr)^2 - P.k;
@@ -60,7 +60,7 @@ P.K = place(P.A, P.B, P.p); % Closed-loop gains
 P.kr = -1/(P.Cr(1,:)*((P.A - P.B*P.K)\P.B)); % feedforward gains
 
 %% Full-state feedback w/integrator
-P.p1 = cat(1,P.p,-1); % set additional pole for system
+P.p1 = cat(1,P.p,-1.2); % set additional pole for system
 [P.K1, P.ki1] = FSF_integrator(P.A,P.B,P.Cr,P.p1); % get gains
 
 

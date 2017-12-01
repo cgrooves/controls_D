@@ -13,7 +13,7 @@ classdef MSD_FSFControl < handle
         z_d1
         
         error_d1
-        integrator
+        ui
     end
     
     methods
@@ -25,10 +25,11 @@ classdef MSD_FSFControl < handle
             self.beta = (2*P.tau - P.Ts)/(2*P.tau + P.Ts); % dirty derivative gain
             self.Ts = P.Ts;
             self.limit = P.sat_limit;
-            self.integrator = 0;
+            self.ui = 0;
             
             self.z_d1 = 0;
             self.zdot_d1 = 0;
+            self.error_d1 = 0;
         end
         %----------------------------------
         function u = input(self,r,y)
@@ -42,11 +43,15 @@ classdef MSD_FSFControl < handle
             
             % implement integrator
             error = z_ref - z;
-            self.integrator = self.integrator + (self.Ts/2)*(error + self.error_d1);
+            self.ui = self.ui + (self.Ts/2)*(error + self.error_d1);
             
-            u_unsat = -self.K*x - self.ki*self.integrator;
-            u = self.saturate(-self.K*x-self.ki*self.integrator); % calculated input 
+            u_unsat = -self.K*x - self.ki*self.ui + 0.25; % constant input disturbance
+            u = self.saturate(u_unsat); % calculated input 
             
+            % integrator anti-windup
+            if self.ki ~= 0
+                self.ui = self.ui + (u-u_unsat)/self.ki;
+            end
             
             % set old values to current ones
             self.z_d1 = x(1);

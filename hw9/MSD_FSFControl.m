@@ -45,7 +45,7 @@ classdef MSD_FSFControl < handle
             error = z_ref - z;
             self.ui = self.ui + (self.Ts/2)*(error + self.error_d1);
             
-            u_unsat = -self.K*x - self.ki*self.ui;
+            u_unsat = -self.K*x - self.ki*self.ui + 0.25; % constant input disturbance
             u = self.saturate(u_unsat); % calculated input 
             
             % integrator anti-windup
