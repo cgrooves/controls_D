@@ -27,8 +27,8 @@ msd_controller = MSD_Observer(P);
 z = dynamics.output();
 
 % Create I/O graph window
-plt = DynamicPlotData(P,'Force(N)','Z Position(m)');
-%obs = ObserverData(2,P.Ts);
+%plt = DynamicPlotData(P,'Force(N)','Z Position(m)');
+obs = ObserverData(2,P.Ts);
 
 % Graphics loop
 while isgraphics(mass)
@@ -43,8 +43,8 @@ while isgraphics(mass)
     z = dynamics.output(); % get current dynamics output
     animation.draw(z); % update animation
     
-    plt.update(f,z);
-    %obs.update(dynamics.state,MSD_Observer.xhat);
+    %plt.update(f,z);
+    obs.update(dynamics.state,msd_controller.xhat);
     
     pause(P.Ts);
     

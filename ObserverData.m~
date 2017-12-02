@@ -42,7 +42,7 @@ classdef ObserverData < handle
                 ylabel(Y);
                 
                 leg1 = ['X',num2str(i)];
-                leg2 = ['X_h_a_t',num2str(i)];
+                leg2 = ['X_hat',num2str(i)];
                 
                 legend(leg1,leg2);
                 
@@ -65,11 +65,14 @@ classdef ObserverData < handle
             err = x - x_hat;
             self.error = cat(2,self.error,err);
             
+            set(self.x_hat_handles,'XData',self.t);
+            set(self.error,'XData',self.t);
+            
             % update plots
             for i = 1:self.n
                 set(self.x_handles(i),'XData',self.t,'YData',self.x(i,:));
-                set(self.x_hat_handles(i),'XData',self.t,'YData',self.x_hat(i,:));
-                set(self.error_handles(i),'XData',self.t,'YData',self.error(i,:));
+                set(self.x_hat_handles(i),'YData',self.x_hat(i,:));
+                set(self.error_handles(i),'YData',self.error(i,:));
             end
             
         end
